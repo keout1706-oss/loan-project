@@ -6,3 +6,7 @@
 
 ### 參照網站
 - https://www.cathaybk.com.tw/cathaybk/personal/loan/calculator/mortgage-monthly-payments/
+
+### 功能介紹
+- 使用者可以選擇環款方式跟借款年限，進行列表統計以及表格呈現每個月還款金額。
+
