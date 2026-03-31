@@ -16,7 +16,7 @@
         <br>
         <label for="rate">貸款利率</label>&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="number" id="rate" name="rate"
-         value="1.85" step="0.1" min="1" > %
+         value="1.85" step="0.01" min="1" > %
          <br>
          <!-- 新增手續費用欄位 handlingFree-->
         <label for="handlingFree">貸款手續費</label>
@@ -38,7 +38,50 @@
         <label for="repayment">還款方式</label>&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="radio" id="repayment1" name="repayment" value="repaymentMethod1" checked>本息平均攤還
         <input type="radio" id="repayment2" name="repayment" value="repaymentMethod2">本金平均攤還
+        <br>
         <button type="submit" id="clacBtn">計算</button>
     </form>
+    <div>
+        <h2>試算結果</h2>
+        
+        <!--摘要表格-->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>項⽬</th>
+                    <th>金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>每⽉還款金額</td>
+                    <td id="monthlyPayment">--</td>
+                </tr>
+                <tr>
+                    <td>總還款金額</td>
+                    <td id="totalPayment">--</td>
+                </tr>
+                <tr>
+                    <td>總利息支出</td>
+                    <td id="totalInterest">--</td>
+                </tr>
+            </tbody>
+        </table>
+        <!--分期明細表格-->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>期數</th>
+                    <th>⽉付金額</th>
+                    <th>本息</th>
+                    <th>利息</th>
+                    <th>剩餘本金</th>
+                </tr>
+            </thead>
+            <tbody id="scheduleBody">
+            <!-- JavaScript動態動⼊-->
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
