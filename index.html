@@ -150,8 +150,10 @@
 
 <body>
     <div class="container">
-        <h1>貸款精算助手</h1>
-        <span class="subtitle">輸入條件，快速分析您的還款計畫</span>
+        <h1>貸款精算助手
+            <span class="subtitle">輸入條件，快速分析您的還款計畫</span>
+        </h1>
+
         <hr>
         <form id="loanForm" action="" class="loan-form">
             <div class="form-row">
@@ -186,7 +188,8 @@
                 <input type="radio" id="repayment1" name="repayment" value="repaymentMethod1" checked>本息平均攤還
                 <input type="radio" id="repayment2" name="repayment" value="repaymentMethod2">本金平均攤還
             </div>
-            <button type="submit" id="clacBtn">計算</button>
+            <!-- 後端才需要submit -->
+            <button type="button" id="clacBtn">計算</button>
         </form>
         <h2>試算結果</h2>
         <div classs="result">
@@ -252,6 +255,33 @@
             </table>
         </div>
     </div>
+
+
+    <script>
+        const title = document.querySelector("h1");
+        console.log(title);
+
+        // 1.只改文字 2.含標籤語法
+        title.innerText = "超級助手";
+        const amountEl = document.querySelector("#amount");
+        const rateEl = document.querySelector("#rate");
+        const loanYearsEl = document.querySelector("#loanYears");
+        const clacBtnEl = document.querySelector("#clacBtn");
+        console.log(amountEl, rateEl, loanYearsEl, clacBtnEl);
+
+        clacBtn.addEventListener("click", function (e) {
+            let amount = amountEl.value;
+            let rate = rateEl.value;
+            let loanYears = loanYearsEl.value;
+
+            let method = document.querySelector(
+                "input[name='repayment']:checked"
+            ).value;
+
+            console.log(amount, rate, loanYears, method);
+        })
+
+    </script>
 </body>
 
 </html>
