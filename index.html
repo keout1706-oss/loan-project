@@ -229,27 +229,7 @@
                     </tr>
                 </thead>
                 <tbody id="scheduleBody">
-                    <tr>
-                        <td>1</td>
-                        <td>10000</td>
-                        <td>100000</td>
-                        <td>6666</td>
-                        <td>10000000</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>10000</td>
-                        <td>100000</td>
-                        <td>6666</td>
-                        <td>10000000</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>10000</td>
-                        <td>100000</td>
-                        <td>6666</td>
-                        <td>10000000</td>
-                    </tr>
+
 
                 </tbody>
             </table>
@@ -258,11 +238,11 @@
 
 
     <script>
-        const title = document.querySelector("h1");
-        console.log(title);
+        // const title = document.querySelector("h1");
+        // console.log(title);
 
-        // 1.只改文字 2.含標籤語法
-        title.innerText = "超級助手";
+        // // 1.只改文字 2.含標籤語法
+        // title.innerText = "超級助手";
         const amountEl = document.querySelector("#amount");
         const rateEl = document.querySelector("#rate");
         const loanYearsEl = document.querySelector("#loanYears");
@@ -281,9 +261,38 @@
 
             console.log(amount, rate, loanYears, method);
 
-            repaymentMethod1(amount * 10000, rate, loanYears);
+            let schedules = repaymentMethod1(amount * 10000, rate, loanYears);
+
+
+            renderTable(schedules);
         })
 
+        // 複製Table
+        function renderTable(schedules) {
+            let tableHtml = "";
+
+
+            for (let i = 0; i < schedules.length; i++) {
+
+                tableHtml += `
+                    <tr>
+                        <td>${schedules[i].month}</td>
+                        <td>${schedules[i].monthlyPayment + schedules[i].interest}</td>
+                        <td>${schedules[i].monthlyPayment}</td>
+                        <td>${schedules[i].interest}</td>
+                        <td>${schedules[i].amount}</td>
+                    </tr>
+            `;
+
+            }
+            console.log(tableHtml);
+
+            document.querySelector("#scheduleBody").innerHTML = tableHtml;
+        };
+
+
+
+        // 本金平均攤還
         function repaymentMethod1(amount, rate, years) {
             let monthRate = rate / 100 / 12; // 月利率
             let months = years * 12;
@@ -291,30 +300,33 @@
             let monthlyPayment = Math.round(amount / months);
             console.log(monthRate, months, monthlyPayment);
 
-            schedulers = [];
+            schedules = [];
             for (let i = 0; i < months; i++) {
                 let interest = Math.round(amount * monthRate);
 
                 amount -= monthlyPayment;
 
+                //最後一期
                 if (i == months - 1) {
                     monthlyPayment += amount;
                     amount = 0;
                 }
 
                 console.log(`第${i + 1}期 本金:${monthlyPayment} 利息:${interest} 剩餘餘額 ${amount}`);
-                schedulers.push(
+                schedules.push(
                     {
                         "month": i + 1,
                         "monthlyPayment": monthlyPayment,
                         "interest": interest,
                         "amount": amount,
                     });
+
+
+
             }
+            console.log(schedules);
 
-            console.log(schedulers);
-
-            return schedulers;
+            return schedules;
 
         }
 
